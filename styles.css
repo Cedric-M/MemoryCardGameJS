@@ -6,6 +6,10 @@
 
 body{
 	height: 100vh;
-	background-color: #060AB2;
+	/*background-color: #060AB2;*/
 }
 
+/*temporary width*/
+img {
+	width: 100px;
+}

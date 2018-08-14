@@ -9,3 +9,8 @@ body{
 	background-color: #060AB2;
 }
 
+/*temporary width*/
+img {
+	width: 100px;
+}
+

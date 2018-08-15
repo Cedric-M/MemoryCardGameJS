@@ -31,6 +31,10 @@ body{
 	transition: transform .2s;
 }
 
+.memory-card.flip{ /*There is no spaces between the names because the 2 classes belong to the same element */
+	transform: rotateY(180deg);
+}
+
 .front-face, .back-face{
 	width: 100%;
 	height: 100%;

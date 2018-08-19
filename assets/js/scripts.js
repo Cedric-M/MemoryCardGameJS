@@ -2,8 +2,10 @@ const cards = document.querySelectorAll('.memory-card'); //List of all memory-ca
 
 let hasFlippedCard = false;
 let firstCard, secondCard;
+let lockBoard = false;
 
 function flipCard() {
+	if (lockBoard) return;
 	this.classList.add('flip')
 
 	if (!hasFlippedCard) { //This is the first time the player has clicked a card
@@ -17,7 +19,6 @@ function flipCard() {
 	secondCard = this;
 
 	checkForMatch();
-	
 }
 
 function checkForMatch(){
@@ -32,10 +33,14 @@ function disableCards(){
 }
 
 function unflipCards(){
+	lockBoard = true;
+
 	setTimeout(function(){ 
 		firstCard.classList.remove('flip');
 		secondCard.classList.remove('flip'); 
+		lockBoard = false;
 	}, 1500);
+
 }
 
 cards.forEach(card => card.addEventListener('click', flipCard));

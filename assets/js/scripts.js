@@ -49,8 +49,15 @@ function resetBoard(){
 	//ES6 Destructuring assignment
 	[lockBoard, hasFlippedCard] = [false, false];
 	[firstCard, secondCard] = [null, null];
-
 }
+
+//IIFE (Immediately Invoked Function Expression)
+(function shuffleCards(){
+	cards.forEach(card => {
+		let randomPos = Math.floor(Math.random() * 12);
+		card.style.order = randomPos;
+	});
+})();
 
 cards.forEach(card => card.addEventListener('click', flipCard));
 /*loop throught the cards list, and to each one of the cards we are going to 

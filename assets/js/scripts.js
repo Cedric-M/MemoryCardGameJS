@@ -4,7 +4,7 @@ let hasFlippedCard = false;
 let firstCard, secondCard;
 
 function flipCard() {
-	this.classList.toggle('flip')
+	this.classList.add('flip')
 
 	if (!hasFlippedCard) { //This is the first time the player has clicked a card
 		hasFlippedCard = true;
@@ -15,9 +15,22 @@ function flipCard() {
 		hasFlippedCard = false; 
 		secondCard = this;
 
-		// Does the 2 cards match ?
-		console.log(firstCard.dataset.name);
-		console.log(secondCard.dataset.name);
+		//The two card has now been revealed, does they match ?
+
+		if (firstCard.dataset.name === secondCard.dataset.name) {
+			//Yes, it's a match !
+			firstCard.removeEventListener('click', flipCard);
+			secondCard.removeEventListener('click', flipCard);
+
+		} else {
+			//No the cards don't match
+			setTimeout(function(){ 
+				firstCard.classList.remove('flip');
+				secondCard.classList.remove('flip'); 
+			}, 1500);
+		
+		}
+
 	}
 }
 

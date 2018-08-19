@@ -9,29 +9,33 @@ function flipCard() {
 	if (!hasFlippedCard) { //This is the first time the player has clicked a card
 		hasFlippedCard = true;
 		firstCard = this;
+		return;
+	} 
 
-	} else {
-		//Second click
-		hasFlippedCard = false; 
-		secondCard = this;
+	//Second click
+	hasFlippedCard = false; 
+	secondCard = this;
 
-		//The two card has now been revealed, does they match ?
+	checkForMatch();
+	
+}
 
-		if (firstCard.dataset.name === secondCard.dataset.name) {
-			//Yes, it's a match !
-			firstCard.removeEventListener('click', flipCard);
-			secondCard.removeEventListener('click', flipCard);
+function checkForMatch(){
+	//Conditional (ternary) Operator
+	let isMatch = firstCard.dataset.name === secondCard.dataset.name; 
+	isMatch ? disableCards() : unflipCards();
+}
 
-		} else {
-			//No the cards don't match
-			setTimeout(function(){ 
-				firstCard.classList.remove('flip');
-				secondCard.classList.remove('flip'); 
-			}, 1500);
-		
-		}
+function disableCards(){
+	firstCard.removeEventListener('click', flipCard);
+	secondCard.removeEventListener('click', flipCard);
+}
 
-	}
+function unflipCards(){
+	setTimeout(function(){ 
+		firstCard.classList.remove('flip');
+		secondCard.classList.remove('flip'); 
+	}, 1500);
 }
 
 cards.forEach(card => card.addEventListener('click', flipCard));

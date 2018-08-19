@@ -6,6 +6,7 @@ let lockBoard = false;
 
 function flipCard() {
 	if (lockBoard) return;
+	if (this === firstCard) return;
 	this.classList.add('flip')
 
 	if (!hasFlippedCard) { //This is the first time the player has clicked a card
@@ -15,7 +16,6 @@ function flipCard() {
 	} 
 
 	//Second click
-	hasFlippedCard = false; 
 	secondCard = this;
 
 	checkForMatch();
@@ -30,6 +30,8 @@ function checkForMatch(){
 function disableCards(){
 	firstCard.removeEventListener('click', flipCard);
 	secondCard.removeEventListener('click', flipCard);
+
+	resetBoard();
 }
 
 function unflipCards(){
@@ -38,8 +40,15 @@ function unflipCards(){
 	setTimeout(function(){ 
 		firstCard.classList.remove('flip');
 		secondCard.classList.remove('flip'); 
-		lockBoard = false;
+		
+		resetBoard();
 	}, 1500);
+}
+
+function resetBoard(){
+	//ES6 Destructuring assignment
+	[lockBoard, hasFlippedCard] = [false, false];
+	[firstCard, secondCard] = [null, null];
 
 }
 
